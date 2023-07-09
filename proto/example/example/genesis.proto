@@ -1,12 +1,16 @@
 syntax = "proto3";
+
 package example.example;
 
 import "gogoproto/gogo.proto";
 import "example/example/params.proto";
+import "example/example/text_storage.proto";
 
 option go_package = "example/x/example/types";
 
 // GenesisState defines the example module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
+           Params      params          = 1 [(gogoproto.nullable) = false];
+  repeated TextStorage textStorageList = 2 [(gogoproto.nullable) = false];
 }
+

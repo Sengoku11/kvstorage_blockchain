@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package example.example;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "example/example/params.proto";
+import "example/example/text_storage.proto";
 
 option go_package = "example/x/example/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/example/example/params";
+  
+  }
+  
+  // Queries a list of TextStorage items.
+  rpc TextStorage    (QueryGetTextStorageRequest) returns (QueryGetTextStorageResponse) {
+    option (google.api.http).get = "/example/example/text_storage/{index}";
+  
+  }
+  rpc TextStorageAll (QueryAllTextStorageRequest) returns (QueryAllTextStorageResponse) {
+    option (google.api.http).get = "/example/example/text_storage";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetTextStorageRequest {
+  string index = 1;
+}
+
+message QueryGetTextStorageResponse {
+  TextStorage textStorage = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllTextStorageRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllTextStorageResponse {
+  repeated TextStorage                            textStorage = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination  = 2;
+}
+

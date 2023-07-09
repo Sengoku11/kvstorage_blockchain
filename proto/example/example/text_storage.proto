@@ -1,0 +1,11 @@
+syntax = "proto3";
+package example.example;
+
+option go_package = "example/x/example/types";
+
+message TextStorage {
+  string index = 1; 
+  string text = 2; 
+  string creator = 3;
+}
+

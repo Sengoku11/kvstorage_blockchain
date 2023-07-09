@@ -1,7 +1,37 @@
 syntax = "proto3";
+
 package example.example;
+
+import "example/example/text_storage.proto";
 
 option go_package = "example/x/example/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc CreateTextStorage (MsgCreateTextStorage) returns (MsgCreateTextStorageResponse);
+  rpc UpdateTextStorage (MsgUpdateTextStorage) returns (MsgUpdateTextStorageResponse);
+  rpc DeleteTextStorage (MsgDeleteTextStorage) returns (MsgDeleteTextStorageResponse);
+}
+message MsgCreateTextStorage {
+  string creator = 1;
+  string index   = 2;
+  string text    = 3;
+}
+
+message MsgCreateTextStorageResponse {}
+
+message MsgUpdateTextStorage {
+  string creator = 1;
+  string index   = 2;
+  string text    = 3;
+}
+
+message MsgUpdateTextStorageResponse {}
+
+message MsgDeleteTextStorage {
+  string creator = 1;
+  string index   = 2;
+}
+
+message MsgDeleteTextStorageResponse {}
+
