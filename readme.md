@@ -9,6 +9,17 @@ ignite chain serve
 
 `serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
 
+### Tx and Query Examples
+
+```
+~/go/bin/exampled tx example create-text-storage "hello" "world" --from alice
+~/go/bin/exampled tx example update-text-storage "hello" "again!" --from alice
+~/go/bin/exampled tx example delete-text-storage "hello" --from alice
+
+~/go/bin/exampled q example list-text-storage
+~/go/bin/exampled q example show-text-storage "hello"
+```
+
 ### Configure
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
